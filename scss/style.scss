@@ -1,0 +1,98 @@
+@import "_null";
+
+body {
+  position: relative;
+  font-family: system-ui, sans-serif;
+  background-color: #3c5235;
+
+  // Скролл заблоковано
+  .lock & {
+    overflow: hidden;
+    touch-action: none;
+    overscroll-behavior: none;
+  }
+  // Сайт завантажений
+  .loaded & {
+  }
+}
+
+.wrapper {
+  padding: 50px;
+
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  @supports (overflow: clip) {
+    overflow: clip;
+  }
+  > main {
+    flex: 1 1 auto;
+  }
+  > * {
+    min-width: 0;
+  }
+}
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  color: #fff;
+}
+
+#field-container {
+  width: 800px;
+  box-shadow: 10px 10px 50px #00000055;
+  border-radius: 10px;
+  overflow: hidden;
+
+  background-color: #e1ffe4;
+  border: 1px solid #acd4a9;
+
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+}
+
+.square {
+  aspect-ratio: 1/1;
+  background-color: #e1ffe4;
+  transition: background-color 100ms ease;
+  &--dark {
+    background-color: #bae8b7;
+  }
+  &.active {
+    background-color: #0e3b00;
+  }
+}
+
+.popup-banner {
+  visibility: hidden;
+  opacity: 0;
+
+  transition: all 500ms ease;
+  &.active {
+    display: flex;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.583);
+
+  justify-content: center;
+  align-items: center;
+  // .popup-banner__text
+  &__text {
+    font-size: 60px;
+    font-weight: 700;
+    color: #e1ffe4;
+  }
+}
