@@ -80,7 +80,6 @@ body {
       overscroll-behavior: none;
 }
 .wrapper {
-  padding: 50px;
   min-height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -115,6 +114,8 @@ main {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .title {
@@ -122,7 +123,8 @@ main {
 }
 
 #field-container {
-  width: 800px;
+  width: 600px;
+  height: 600px;
   -webkit-box-shadow: 10px 10px 50px rgba(0, 0, 0, 0.3333333333);
           box-shadow: 10px 10px 50px rgba(0, 0, 0, 0.3333333333);
   border-radius: 10px;
@@ -130,7 +132,6 @@ main {
   background-color: #e1ffe4;
   border: 1px solid #acd4a9;
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
 }
 
 .square {
@@ -145,6 +146,10 @@ main {
 .square.active {
   background-color: #0e3b00;
 }
+.square.body {
+  background-color: #44bb20;
+  border: 0.5px solid #000;
+}
 
 .popup-banner {
   visibility: hidden;
@@ -157,12 +162,17 @@ main {
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.583);
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  gap: 30px;
 }
 .popup-banner.active {
   display: -webkit-box;
@@ -175,4 +185,26 @@ main {
   font-size: 60px;
   font-weight: 700;
   color: #e1ffe4;
+}
+.popup-banner button {
+  padding: 15px;
+  background-color: #44bb20;
+  color: #e1ffe4;
+  font-size: 36px;
+  font-weight: 600;
+  border-radius: 8px;
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+}
+.popup-banner button:hover {
+  background-color: #0e3b00;
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+.popup-banner button:active {
+  -webkit-transform: scale(0.95);
+      -ms-transform: scale(0.95);
+          transform: scale(0.95);
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.6666666667);
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.6666666667);
 }

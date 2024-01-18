@@ -17,8 +17,6 @@ body {
 }
 
 .wrapper {
-  padding: 50px;
-
   min-height: 100%;
   display: flex;
   flex-direction: column;
@@ -38,6 +36,9 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .title {
@@ -45,7 +46,8 @@ main {
 }
 
 #field-container {
-  width: 800px;
+  width: 600px;
+  height: 600px;
   box-shadow: 10px 10px 50px #00000055;
   border-radius: 10px;
   overflow: hidden;
@@ -54,7 +56,6 @@ main {
   border: 1px solid #acd4a9;
 
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
 }
 
 .square {
@@ -66,6 +67,10 @@ main {
   }
   &.active {
     background-color: #0e3b00;
+  }
+  &.body {
+    background-color: #44bb20;
+    border: 0.5px solid #000;
   }
 }
 
@@ -87,12 +92,34 @@ main {
   left: 0;
   background-color: rgba(0, 0, 0, 0.583);
 
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 30px;
   // .popup-banner__text
   &__text {
     font-size: 60px;
     font-weight: 700;
     color: #e1ffe4;
+  }
+  button {
+    padding: 15px;
+    background-color: #44bb20;
+
+    color: #e1ffe4;
+    font-size: 36px;
+    font-weight: 600;
+    border-radius: 8px;
+
+    transition: all 200ms ease;
+
+    &:hover {
+      background-color: #0e3b00;
+      box-shadow: 0 0 20px #00000033;
+    }
+    &:active {
+      transform: scale(0.95);
+      box-shadow: 0 0 20px #000000aa;
+    }
   }
 }

@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" lock>
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Snakey</title>
-
   <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body class="page">
+<body class="page" data-difficulty="24" data-speed="100">
   <div class="wrapper">
     <header>
     </header>
@@ -20,7 +19,8 @@
   </div>
 
   <div class="popup-banner">
-    <span class="popup-banner__text">You've lost! Try again!</span>
+    <span class="popup-banner__text">You've lost!</span>
+    <button id="reset-btn">Try again</button>
   </div>
 
   <script src="script.js"></script>
