@@ -16,7 +16,10 @@ resetBtn.addEventListener("click", resetGame);
 
 // press any key to resume
 document.addEventListener("keydown", (e) => {
-  if (popupBanner.classList.contains("active")) {
+  if (
+    (popupBanner.classList.contains("active") && e.key === "Enter") ||
+    e.key === " "
+  ) {
     resetGame();
   }
 });
@@ -66,16 +69,16 @@ function gameBody() {
 
     if (key === "ArrowDown" && direction !== "up") {
       snake.movementDir = "down";
-    }
-    if (key === "ArrowUp" && direction !== "down") {
+      refreshState();
+    } else if (key === "ArrowUp" && direction !== "down") {
       snake.movementDir = "up";
-    }
-    if (key === "ArrowLeft" && direction !== "right") {
+      refreshState();
+    } else if (key === "ArrowLeft" && direction !== "right") {
       snake.movementDir = "left";
-    }
-
-    if (key === "ArrowRight" && direction !== "left") {
+      refreshState();
+    } else if (key === "ArrowRight" && direction !== "left") {
       snake.movementDir = "right";
+      refreshState();
     }
   });
 
@@ -129,19 +132,21 @@ function gameBody() {
   addApple();
 
   // refresh the state
-  let refreshState = setInterval(() => {
+  let iterator = setInterval(refreshState, snakeSpeed);
+
+  function refreshState() {
     // change position of head depending on movementDirection
     let resultOfUpdate = updateHeadCoordinates(
       snake.movementDir,
       snake,
-      refreshState
+      iterator
     );
     // stop execution if game is finished
     if (resultOfUpdate === "finished") {
       return;
     }
 
-    // ! increase body length ===============
+    // increase body length ===============
     if (appleCoordinates[0] === snake.x && appleCoordinates[1] === snake.y) {
       let lastBodySquare = coordinatesOfBody[coordinatesOfBody.length - 1];
       coordinatesOfBody.push([lastBodySquare[0] - 1, lastBodySquare[1]]);
@@ -163,13 +168,14 @@ function gameBody() {
     coordinatesOfBody.unshift([prevX, prevY]);
 
     // find new square coresponding to head position
+
     for (const square of squares) {
       if (+square.dataset.x === snake.x && +square.dataset.y === snake.y) {
         activeSquare = square;
         square.classList.add("active");
         if (square.classList.contains("body")) {
           finishGame();
-          clearInterval(refreshState);
+          clearInterval(iterator);
         }
         break;
       }
@@ -188,7 +194,7 @@ function gameBody() {
           square.classList.add("body");
       }
     }
-  }, snakeSpeed);
+  }
 }
 function findRandomIndex(num) {
   return Math.round(Math.random() * (num ** 2 - 1) + 1);
@@ -234,9 +240,9 @@ function finishGame(interval) {
 }
 function resetGame() {
   for (let square of squares) {
-    if (square.classList.contains("apple")) square.classList.remove("apple");
-    if (square.classList.contains("active")) square.classList.remove("active");
-    if (square.classList.contains("body")) square.classList.remove("body");
+    square.classList.remove("active");
+    square.classList.remove("body");
+    square.classList.remove("apple");
   }
   popupBanner.classList.remove("active");
   gameBody();
