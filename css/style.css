@@ -67,6 +67,36 @@ h6 {
   font-size: inherit;
 }
 
+.square {
+  aspect-ratio: 1/1;
+  background-color: #e1ffe4;
+  -webkit-transition: background-color 100ms ease;
+  transition: background-color 100ms ease;
+}
+.square--dark {
+  background-color: #bae8b7;
+}
+.square.body {
+  background-color: #44bb20;
+  border: 0.1px solid #000;
+}
+.square.apple {
+  position: relative;
+}
+.square.apple::before {
+  content: "";
+  position: absolute;
+  top: 12.5%;
+  left: 12.5%;
+  width: 75%;
+  height: 75%;
+  background-color: red;
+  border-radius: 50%;
+}
+.square.active {
+  background-color: #0e3b00;
+}
+
 body {
   position: relative;
   font-family: system-ui, sans-serif;
@@ -132,25 +162,6 @@ main {
   background-color: #e1ffe4;
   border: 1px solid #acd4a9;
   display: grid;
-}
-
-.square {
-  aspect-ratio: 1/1;
-  background-color: #e1ffe4;
-  -webkit-transition: background-color 100ms ease;
-  transition: background-color 100ms ease;
-}
-.square--dark {
-  background-color: #bae8b7;
-}
-.square.active {
-  background-color: #0e3b00;
-}
-.square.body {
-  background-color: #44bb20;
-}
-.square.apple {
-  background-color: red;
 }
 
 .popup-banner {

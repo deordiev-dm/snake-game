@@ -1,0 +1,29 @@
+.square {
+  aspect-ratio: 1/1;
+  background-color: #e1ffe4;
+  transition: background-color 100ms ease;
+  &--dark {
+    background-color: #bae8b7;
+  }
+  &.body {
+    background-color: #44bb20;
+    border: 0.1px solid #000;
+  }
+  &.apple {
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 12.5%;
+      left: 12.5%;
+
+      width: 75%;
+      height: 75%;
+      background-color: red;
+      border-radius: 50%;
+    }
+  }
+  &.active {
+    background-color: #0e3b00;
+  }
+}

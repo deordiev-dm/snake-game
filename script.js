@@ -106,9 +106,27 @@ function gameBody() {
     }
   }
 
-  let apple = squares[findRandomIndex(squaresInRow)];
-  apple.classList.add("apple");
-  let appleCoordinates = [+apple.dataset.x, +apple.dataset.y];
+  let apple;
+  let appleCoordinates;
+  function addApple() {
+    let randomSquare = squares[findRandomIndex(squaresInRow)];
+    let squareClassList = randomSquare.classList;
+
+    let isSquareOccupied =
+      squareClassList.contains("active") ||
+      squareClassList.contains("body") ||
+      squareClassList.contains("apple");
+
+    if (isSquareOccupied) {
+      addApple();
+    } else {
+      apple = randomSquare;
+      apple.classList.add("apple");
+      appleCoordinates = [+apple.dataset.x, +apple.dataset.y];
+    }
+  }
+
+  addApple();
 
   // refresh the state
   let refreshState = setInterval(() => {
@@ -125,8 +143,11 @@ function gameBody() {
 
     // ! increase body length ===============
     if (appleCoordinates[0] === snake.x && appleCoordinates[1] === snake.y) {
-      console.log(true, coordinatesOfBody);
-      coordinatesOfBody.push([]);
+      let lastBodySquare = coordinatesOfBody[coordinatesOfBody.length - 1];
+      coordinatesOfBody.push([lastBodySquare[0] - 1, lastBodySquare[1]]);
+
+      apple.classList.remove("apple");
+      addApple();
     }
 
     // ===============================
@@ -146,6 +167,10 @@ function gameBody() {
       if (+square.dataset.x === snake.x && +square.dataset.y === snake.y) {
         activeSquare = square;
         square.classList.add("active");
+        if (square.classList.contains("body")) {
+          finishGame();
+          clearInterval(refreshState);
+        }
         break;
       }
     }
