@@ -148,7 +148,9 @@ main {
 }
 .square.body {
   background-color: #44bb20;
-  border: 0.5px solid #000;
+}
+.square.apple {
+  background-color: red;
 }
 
 .popup-banner {

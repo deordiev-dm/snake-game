@@ -14,6 +14,13 @@ let gameState = "running";
 // reset the game event
 resetBtn.addEventListener("click", resetGame);
 
+// press any key to resume
+document.addEventListener("keydown", (e) => {
+  if (popupBanner.classList.contains("active")) {
+    resetGame();
+  }
+});
+
 // create a grid
 gridConatiner.style.gridTemplateColumns = `repeat(${squaresInRow}, 
   ${600 / squaresInRow}px)`;
@@ -99,6 +106,10 @@ function gameBody() {
     }
   }
 
+  let apple = squares[findRandomIndex(squaresInRow)];
+  apple.classList.add("apple");
+  let appleCoordinates = [+apple.dataset.x, +apple.dataset.y];
+
   // refresh the state
   let refreshState = setInterval(() => {
     // change position of head depending on movementDirection
@@ -107,9 +118,15 @@ function gameBody() {
       snake,
       refreshState
     );
-
+    // stop execution if game is finished
     if (resultOfUpdate === "finished") {
       return;
+    }
+
+    // ! increase body length ===============
+    if (appleCoordinates[0] === snake.x && appleCoordinates[1] === snake.y) {
+      console.log(true, coordinatesOfBody);
+      coordinatesOfBody.push([]);
     }
 
     // ===============================
@@ -148,7 +165,9 @@ function gameBody() {
     }
   }, snakeSpeed);
 }
-
+function findRandomIndex(num) {
+  return Math.round(Math.random() * (num ** 2 - 1) + 1);
+}
 function updateHeadCoordinates(dir, obj, interval) {
   switch (dir) {
     case "right":
@@ -189,10 +208,11 @@ function finishGame(interval) {
   popupBanner.classList.add("active");
 }
 function resetGame() {
-  gameBody();
   for (let square of squares) {
+    if (square.classList.contains("apple")) square.classList.remove("apple");
     if (square.classList.contains("active")) square.classList.remove("active");
     if (square.classList.contains("body")) square.classList.remove("body");
   }
   popupBanner.classList.remove("active");
+  gameBody();
 }

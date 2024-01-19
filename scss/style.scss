@@ -70,7 +70,10 @@ main {
   }
   &.body {
     background-color: #44bb20;
-    border: 0.5px solid #000;
+    // border: 0.5px solid #000;
+  }
+  &.apple {
+    background-color: red;
   }
 }
 
