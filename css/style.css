@@ -1,3 +1,33 @@
+@font-face {
+  font-family: "icons";
+  src: url("fonts/icons/icons.woff") format("woff"), url("fonts/icons/icons.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+[class*=_icon-]:before {
+  font-family: "icons";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class*=_icon-]:before {
+  display: block;
+}
+
+._icon-github:before {
+  content: "\eab0";
+}
+
+._icon-linkedin:before {
+  content: "\eac9";
+}
+
 * {
   padding: 0px;
   margin: 0px;
@@ -67,40 +97,10 @@ h6 {
   font-size: inherit;
 }
 
-.square {
-  aspect-ratio: 1/1;
-  background-color: #e1ffe4;
-  -webkit-transition: background-color 100ms ease;
-  transition: background-color 100ms ease;
-}
-.square--dark {
-  background-color: #bae8b7;
-}
-.square.body {
-  background-color: #44bb20;
-  border: 0.1px solid #000;
-}
-.square.apple {
-  position: relative;
-}
-.square.apple::before {
-  content: "";
-  position: absolute;
-  top: 12.5%;
-  left: 12.5%;
-  width: 75%;
-  height: 75%;
-  background-color: red;
-  border-radius: 50%;
-}
-.square.active {
-  background-color: #0e3b00;
-}
-
 body {
   position: relative;
   font-family: system-ui, sans-serif;
-  background-color: #3c5235;
+  background-color: #638889;
 }
 .lock body {
   overflow: hidden;
@@ -109,6 +109,11 @@ body {
   -ms-scroll-chaining: none;
       overscroll-behavior: none;
 }
+[class*=__container] {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
 .wrapper {
   min-height: 100%;
   display: -webkit-box;
@@ -152,14 +157,14 @@ main {
   color: #fff;
 }
 
-#field-container {
+.game-field {
   width: 600px;
   height: 600px;
   -webkit-box-shadow: 10px 10px 50px rgba(0, 0, 0, 0.3333333333);
           box-shadow: 10px 10px 50px rgba(0, 0, 0, 0.3333333333);
   border-radius: 10px;
   overflow: hidden;
-  background-color: #e1ffe4;
+  background-color: #9dbc98;
   border: 1px solid #acd4a9;
   display: grid;
 }
@@ -220,4 +225,47 @@ main {
           transform: scale(0.95);
   -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.6666666667);
           box-shadow: 0 0 20px rgba(0, 0, 0, 0.6666666667);
+}
+
+.footer__container {
+  background-color: #ebd9b4;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.footer__icons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.square {
+  aspect-ratio: 1/1;
+  background-color: #e1ffe4;
+  -webkit-transition: background-color 100ms ease;
+  transition: background-color 100ms ease;
+}
+.square--dark {
+  background-color: #bae8b7;
+}
+.square.body {
+  background-color: #44bb20;
+  border: 0.1px solid #000;
+}
+.square.apple {
+  position: relative;
+}
+.square.apple::before {
+  content: "";
+  position: absolute;
+  top: 12.5%;
+  left: 12.5%;
+  width: 75%;
+  height: 75%;
+  background-color: red;
+  border-radius: 50%;
+}
+.square.active {
+  background-color: #0e3b00;
 }

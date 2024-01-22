@@ -1,21 +1,37 @@
 <!DOCTYPE html>
-<html lang="en" lock>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Snakey</title>
+  <link rel="shortcut icon" href="favicon.png" type="image/png">
   <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body class="page" data-difficulty="20" data-speed="150">
+<body class="page" data-grid="20" data-speed="150">
   <div class="wrapper">
-    <header>
+
+    <header class="header">
+      <div class="header__container">
+        <p class="header__score">Your Score: <span id="score-count">6</span></p>
+      </div>
     </header>
+
     <main>
-      <div id="field-container"></div>
+      <div class="game-field"></div>
     </main>
-    <footer></footer>
+
+    <footer class="footer">
+      <div class="footer__container">
+        <p>Developed by Dmytro Deordiiev, 2024</p>
+        <div class="footer__icons">
+          <div class="footer__icon _icon-github"></div>
+          <div class="footer__icon _icon-linkedin"></div>
+        </div>
+      </div>
+    </footer>
+
   </div>
 
   <div class="popup-banner">
@@ -23,7 +39,7 @@
     <button id="reset-btn">Try again</button>
   </div>
 
-  <script src="script.js"></script>
+  <script src="js/script.js"></script>
 </body>
 
 </html>
