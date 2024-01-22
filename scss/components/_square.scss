@@ -1,9 +1,9 @@
 .square {
   aspect-ratio: 1/1;
-  background-color: #e1ffe4;
+  background-color: var(--yellow-300);
   transition: background-color 100ms ease;
-  &--dark {
-    background-color: #bae8b7;
+  &.dark {
+    background-color: var(--yellow-400);
   }
   &.body {
     background-color: #44bb20;

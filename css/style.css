@@ -1,6 +1,7 @@
 @font-face {
   font-family: "icons";
-  src: url("fonts/icons/icons.woff") format("woff"), url("fonts/icons/icons.woff2") format("woff2");
+  src: url("../../fonts/icons/icons.woff") format("woff");
+  src: url("../../fonts/icons/icons.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -97,10 +98,20 @@ h6 {
   font-size: inherit;
 }
 
+:root {
+  --green-700: #3a4d39;
+  --green-500: #4f6f52;
+  --green-400: #739072;
+  --yellow-400: #ece3ce;
+  --yellow-300: #faf8ed;
+  --orange-400: #ff6d28;
+  --orange-300: #ffb999;
+}
+
 body {
   position: relative;
   font-family: system-ui, sans-serif;
-  background-color: #638889;
+  background-color: var(--green-700);
 }
 .lock body {
   overflow: hidden;
@@ -110,8 +121,8 @@ body {
       overscroll-behavior: none;
 }
 [class*=__container] {
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 4.5%;
+  padding-right: 4.5%;
 }
 
 .wrapper {
@@ -140,6 +151,8 @@ body {
 }
 
 main {
+  padding-top: 30px;
+  padding-bottom: 30px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -149,14 +162,17 @@ main {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
 }
 
-.title {
+.header__container {
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+.header__score {
+  font-size: 32px;
+  font-weight: 700;
   color: #fff;
 }
-
 .game-field {
   width: 600px;
   height: 600px;
@@ -164,11 +180,80 @@ main {
           box-shadow: 10px 10px 50px rgba(0, 0, 0, 0.3333333333);
   border-radius: 10px;
   overflow: hidden;
-  background-color: #9dbc98;
-  border: 1px solid #acd4a9;
+  background-color: var(--yellow-400);
+  border: 3px solid var(--green-500);
   display: grid;
 }
 
+.square {
+  aspect-ratio: 1/1;
+  background-color: var(--yellow-300);
+  -webkit-transition: background-color 100ms ease;
+  transition: background-color 100ms ease;
+}
+.square.dark {
+  background-color: var(--yellow-400);
+}
+.square.body {
+  background-color: #44bb20;
+  border: 0.1px solid #000;
+}
+.square.apple {
+  position: relative;
+}
+.square.apple::before {
+  content: "";
+  position: absolute;
+  top: 12.5%;
+  left: 12.5%;
+  width: 75%;
+  height: 75%;
+  background-color: red;
+  border-radius: 50%;
+}
+.square.active {
+  background-color: #0e3b00;
+}
+
+.footer {
+  color: #fff;
+  font-weight: 500;
+}
+.footer__container {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-radius: 10px 10px 0 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 15px 30px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  background-color: var(--green-500);
+}
+.footer__icons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 15px;
+}
+.footer__link {
+  padding: 5px;
+  font-size: 28px;
+  -webkit-transition: color 300ms ease;
+  transition: color 300ms ease;
+}
+@media (any-hover: hover) {
+  .footer__link:hover {
+    color: var(--orange-400);
+  }
+}
 .popup-banner {
   visibility: hidden;
   opacity: 0;
@@ -225,47 +310,4 @@ main {
           transform: scale(0.95);
   -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.6666666667);
           box-shadow: 0 0 20px rgba(0, 0, 0, 0.6666666667);
-}
-
-.footer__container {
-  background-color: #ebd9b4;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  padding-top: 15px;
-  padding-bottom: 15px;
-}
-.footer__icons {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-.square {
-  aspect-ratio: 1/1;
-  background-color: #e1ffe4;
-  -webkit-transition: background-color 100ms ease;
-  transition: background-color 100ms ease;
-}
-.square--dark {
-  background-color: #bae8b7;
-}
-.square.body {
-  background-color: #44bb20;
-  border: 0.1px solid #000;
-}
-.square.apple {
-  position: relative;
-}
-.square.apple::before {
-  content: "";
-  position: absolute;
-  top: 12.5%;
-  left: 12.5%;
-  width: 75%;
-  height: 75%;
-  background-color: red;
-  border-radius: 50%;
-}
-.square.active {
-  background-color: #0e3b00;
 }

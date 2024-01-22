@@ -1,0 +1,33 @@
+.footer {
+  color: #fff;
+  font-weight: 500;
+  &__container {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 10px 10px 0 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px 30px;
+    flex-wrap: wrap;
+
+    background-color: var(--green-500);
+  }
+  &__icons {
+    display: flex;
+    gap: 15px;
+  }
+  &__link {
+    padding: 5px;
+    font-size: 28px;
+    transition: color 300ms ease;
+    @media (any-hover: hover) {
+      &:hover {
+        color: var(--orange-400);
+      }
+    }
+  }
+  &__icon {
+  }
+}
