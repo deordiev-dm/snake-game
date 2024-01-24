@@ -151,7 +151,7 @@ body {
 }
 
 main {
-  padding-top: 30px;
+  padding-top: 80px;
   padding-bottom: 30px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -164,6 +164,10 @@ main {
           justify-content: center;
 }
 
+.header {
+  position: fixed;
+  width: 100%;
+}
 .header__container {
   padding-top: 20px;
   padding-bottom: 10px;
@@ -174,8 +178,8 @@ main {
   color: #fff;
 }
 .game-field {
-  width: 600px;
-  height: 600px;
+  width: 550px;
+  height: 550px;
   -webkit-box-shadow: 10px 10px 50px rgba(0, 0, 0, 0.3333333333);
           box-shadow: 10px 10px 50px rgba(0, 0, 0, 0.3333333333);
   border-radius: 10px;
@@ -194,7 +198,7 @@ main {
 .square.dark {
   background-color: var(--yellow-400);
 }
-.square.body {
+.square.snake-body {
   background-color: #44bb20;
   border: 0.1px solid #000;
 }
@@ -211,7 +215,7 @@ main {
   background-color: red;
   border-radius: 50%;
 }
-.square.active {
+.square.snake-head {
   background-color: #0e3b00;
 }
 
