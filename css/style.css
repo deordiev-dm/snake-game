@@ -193,7 +193,7 @@ main {
 .game-field.game-over {
   -webkit-animation: vibrate 0.3s linear 1 both;
           animation: vibrate 0.3s linear 1 both;
-  outline: 3px solid var(--orange-400);
+  outline: 3px solid #c62017;
 }
 
 @-webkit-keyframes vibrate {
@@ -260,7 +260,7 @@ main {
 }
 .square.snake-body {
   background-color: #44bb20;
-  border: 0.1px solid #000;
+  border: 0.1px solid var(--green-400);
 }
 .square.apple {
   position: relative;
@@ -272,7 +272,7 @@ main {
   left: 12.5%;
   width: 75%;
   height: 75%;
-  background-color: red;
+  background-color: #c62017;
   border-radius: 50%;
   -webkit-animation: blink 0.8s 1 both;
           animation: blink 0.8s 1 both;

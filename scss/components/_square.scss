@@ -7,7 +7,7 @@
   }
   &.snake-body {
     background-color: #44bb20;
-    border: 0.1px solid #000;
+    border: 0.1px solid var(--green-400);
   }
   &.apple {
     position: relative;
@@ -19,7 +19,7 @@
 
       width: 75%;
       height: 75%;
-      background-color: red;
+      background-color: #c62017;
       border-radius: 50%;
 
       animation: blink 0.8s 1 both;

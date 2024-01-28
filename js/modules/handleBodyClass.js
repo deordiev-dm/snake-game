@@ -1,4 +1,4 @@
-export function findBody() {
+export function handleBodyClass() {
   let isFirstRun = true;
 
   return function () {
@@ -9,6 +9,7 @@ export function findBody() {
         isFirstRun = false;
       }
     } else {
+      this.deletedSq.classList.remove("snake-body");
       for (let square of this.body) {
         square.classList.add("snake-body");
       }
