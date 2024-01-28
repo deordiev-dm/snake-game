@@ -6,7 +6,33 @@
   overflow: hidden;
 
   background-color: var(--yellow-400);
-  border: 3px solid var(--green-500);
-
+  outline: 3px solid var(--green-400);
   display: grid;
+
+  transition: outline 300ms ease;
+  &.game-over {
+    animation: vibrate 0.3s linear 1 both;
+    outline: 3px solid var(--orange-400);
+  }
+}
+
+@keyframes vibrate {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(5px, -5px);
+  }
+  40% {
+    transform: translate(5px, 5px);
+  }
+  60% {
+    transform: translate(-5px, 5px);
+  }
+  80% {
+    transform: translate(-5px, -5px);
+  }
+  100% {
+    transform: translate(0);
+  }
 }

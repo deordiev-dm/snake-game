@@ -21,9 +21,23 @@
       height: 75%;
       background-color: red;
       border-radius: 50%;
+
+      animation: blink 0.8s 1 both;
     }
   }
   &.snake-head {
     background-color: #0e3b00;
+  }
+}
+
+@keyframes blink {
+  0%,
+  50%,
+  100% {
+    opacity: 1;
+  }
+  25%,
+  75% {
+    opacity: 0;
   }
 }

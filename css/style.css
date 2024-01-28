@@ -185,10 +185,70 @@ main {
   border-radius: 10px;
   overflow: hidden;
   background-color: var(--yellow-400);
-  border: 3px solid var(--green-500);
+  outline: 3px solid var(--green-400);
   display: grid;
+  -webkit-transition: outline 300ms ease;
+  transition: outline 300ms ease;
+}
+.game-field.game-over {
+  -webkit-animation: vibrate 0.3s linear 1 both;
+          animation: vibrate 0.3s linear 1 both;
+  outline: 3px solid var(--orange-400);
 }
 
+@-webkit-keyframes vibrate {
+  0% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+  }
+  20% {
+    -webkit-transform: translate(5px, -5px);
+            transform: translate(5px, -5px);
+  }
+  40% {
+    -webkit-transform: translate(5px, 5px);
+            transform: translate(5px, 5px);
+  }
+  60% {
+    -webkit-transform: translate(-5px, 5px);
+            transform: translate(-5px, 5px);
+  }
+  80% {
+    -webkit-transform: translate(-5px, -5px);
+            transform: translate(-5px, -5px);
+  }
+  100% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+  }
+}
+
+@keyframes vibrate {
+  0% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+  }
+  20% {
+    -webkit-transform: translate(5px, -5px);
+            transform: translate(5px, -5px);
+  }
+  40% {
+    -webkit-transform: translate(5px, 5px);
+            transform: translate(5px, 5px);
+  }
+  60% {
+    -webkit-transform: translate(-5px, 5px);
+            transform: translate(-5px, 5px);
+  }
+  80% {
+    -webkit-transform: translate(-5px, -5px);
+            transform: translate(-5px, -5px);
+  }
+  100% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+  }
+}
 .square {
   aspect-ratio: 1/1;
   background-color: var(--yellow-300);
@@ -214,11 +274,30 @@ main {
   height: 75%;
   background-color: red;
   border-radius: 50%;
+  -webkit-animation: blink 0.8s 1 both;
+          animation: blink 0.8s 1 both;
 }
 .square.snake-head {
   background-color: #0e3b00;
 }
 
+@-webkit-keyframes blink {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+  25%, 75% {
+    opacity: 0;
+  }
+}
+
+@keyframes blink {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+  25%, 75% {
+    opacity: 0;
+  }
+}
 .footer {
   color: #fff;
   font-weight: 500;

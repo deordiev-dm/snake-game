@@ -1,51 +1,77 @@
-import { fillFieldWithSquares } from "./modules/grid.js";
-import { determineSnakePosition } from "./modules/determineSnakePosition.js";
+import { fillWithSquares } from "./modules/fillWithSquares.js";
+
+import { findHead } from "./modules/findHead.js";
+import { findBody } from "./modules/findBody.js";
+import { addApple } from "./modules/addApple.js";
+
+import { updateHead } from "./modules/updateHead.js";
+import { updateBody } from "./modules/updateBody.js";
+
 import { changeDirection } from "./modules/changeDirection.js";
-import { updateCoordinates } from "./modules/updateCoordinates.js";
-import { removeStyles } from "./modules/removeStyles.js";
 
-// =====
-
-const snakeSpeed = +document.body.dataset.speed;
+const scoreCounter = document.getElementById("score-count");
+const resfreshSpeed = +document.body.dataset.speed;
 const squaresInRow = +document.body.dataset.grid;
 const field = document.querySelector(".game-field");
-const squares = fillFieldWithSquares(field, squaresInRow);
-let direction = "right";
 
+// game
+const snake = setGame();
 playGame();
 
-// local functions
-function changeDirectionEventHandler(e) {
-  const arrows = ["ArrowUp", "ArrowRight", "ArrowDown", "ArrowLeft"];
+function setGame() {
+  const snake = {
+    col: 7,
+    row: 8,
+    length: 3,
+    dir: "right",
+    head: { square: null, index: null },
+    body: [],
+    apple: null,
+    score: 0,
+    // methods
+    findHead: findHead(),
+    findBody: findBody(),
+    addApple,
+    changeDirection,
+    updateHead,
+    updateBody,
+    // additional properties
+    grid: +document.body.dataset.grid,
+    squares: fillWithSquares(field, squaresInRow),
+  };
 
-  if (arrows.includes(e.key)) {
-    direction = changeDirection(e.key, direction);
-    console.log(direction); // !temp
-  }
+  snake.findHead();
+  snake.findBody();
+  snake.addApple();
+
+  document.addEventListener("keydown", (e) => {
+    snake.changeDirection(e.key);
+  });
+
+  return snake;
 }
 
-// * ============================
 function playGame() {
-  let coordinates = determineSnakePosition(squares);
+  let gameInterval = setInterval(() => {
+    snake.updateBody();
+    snake.updateHead();
 
-  document.addEventListener("keydown", changeDirectionEventHandler);
+    snake.findBody();
+    snake.findHead();
 
-  let gameIteration = setInterval(() => {
-    // todo: написати перевірку
-    // перевірка на те чи змія знаходиться в межах контейнеру
-    // продовжити або закінчити гру
-
-    coordinates = updateCoordinates(direction, ...coordinates);
-
-    removeStyles(squares, "snake-head", "snake-body");
-
-    determineSnakePosition(squares, ...coordinates); // ? length
-  }, snakeSpeed);
+    if (snake.head.square === snake.apple) {
+      snake.length++;
+      snake.score++;
+      scoreCounter.innerHTML = snake.score;
+      snake.body.push(snake.squares[0]);
+      snake.apple.classList.remove("apple");
+      snake.addApple();
+    }
+  }, resfreshSpeed);
 }
-// * ============================
 
-function stopGame() {
+function stopGame(interval) {
+  clearInterval(interval);
   document.removeEventListener("keydown", changeDirectionEventHandler);
+  field.classList.add("game-over");
 }
-
-// ! 🛑 danger modules under the construction
