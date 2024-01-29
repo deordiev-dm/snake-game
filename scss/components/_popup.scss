@@ -1,12 +1,12 @@
-.popup-banner {
+.popup-over {
   visibility: hidden;
   opacity: 0;
 
-  transition: all 500ms ease;
+  transition: all 500ms ease 150ms;
   &.active {
-    display: flex;
     visibility: visible;
     opacity: 1;
+    z-index: 50;
   }
 
   position: fixed;
@@ -14,19 +14,35 @@
   width: 100%;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.583);
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(2px);
 
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
-  // .popup-banner__text
+  &__content {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+
+    opacity: 0;
+    transform: scale(0);
+    transition: all 400ms ease 300ms;
+
+    .active & {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
   &__text {
     font-size: 60px;
     font-weight: 700;
     color: #e1ffe4;
   }
-  button {
+  &__reset {
     padding: 15px;
     background-color: #44bb20;
 

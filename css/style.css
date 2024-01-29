@@ -167,15 +167,28 @@ main {
 .header {
   position: fixed;
   width: 100%;
+  z-index: 51;
 }
 .header__container {
   padding-top: 20px;
   padding-bottom: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 15px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.header__container p {
+  font-size: 28px;
+  font-weight: 700;
 }
 .header__score {
-  font-size: 32px;
-  font-weight: 700;
   color: #fff;
+}
+.header__high-score {
+  color: var(--orange-400);
 }
 .game-field {
   width: 550px;
@@ -337,17 +350,31 @@ main {
     color: var(--orange-400);
   }
 }
-.popup-banner {
+.popup-over {
   visibility: hidden;
   opacity: 0;
-  -webkit-transition: all 500ms ease;
-  transition: all 500ms ease;
+  -webkit-transition: all 500ms ease 150ms;
+  transition: all 500ms ease 150ms;
   position: fixed;
   height: 100%;
   width: 100%;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.583);
+  background-color: rgba(0, 0, 0, 0.75);
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+}
+.popup-over.active {
+  visibility: visible;
+  opacity: 1;
+  z-index: 50;
+}
+.popup-over__content {
+  height: 100%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -359,20 +386,25 @@ main {
       -ms-flex-align: center;
           align-items: center;
   gap: 30px;
+  opacity: 0;
+  -webkit-transform: scale(0);
+      -ms-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: all 400ms ease 300ms;
+  transition: all 400ms ease 300ms;
 }
-.popup-banner.active {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  visibility: visible;
+.active .popup-over__content {
+  -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1);
   opacity: 1;
 }
-.popup-banner__text {
+.popup-over__text {
   font-size: 60px;
   font-weight: 700;
   color: #e1ffe4;
 }
-.popup-banner button {
+.popup-over__reset {
   padding: 15px;
   background-color: #44bb20;
   color: #e1ffe4;
@@ -382,12 +414,12 @@ main {
   -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
 }
-.popup-banner button:hover {
+.popup-over__reset:hover {
   background-color: #0e3b00;
   -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
           box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
-.popup-banner button:active {
+.popup-over__reset:active {
   -webkit-transform: scale(0.95);
       -ms-transform: scale(0.95);
           transform: scale(0.95);

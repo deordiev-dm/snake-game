@@ -9,12 +9,14 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body class="page" data-grid="18" data-speed="200">
+<body class="page" data-grid="15" data-speed="180">
   <div class="wrapper">
 
     <header class="header">
       <div class="header__container">
         <p class="header__score">Your Score: <span class="header__counter" id="score-count">0</span></p>
+        <p class="header__high-score">Highest Score: <span class="header__high-score-counter"
+            id="high-score-count">0</span></p>
       </div>
     </header>
 
@@ -41,12 +43,14 @@
 
   </div>
 
-  <!-- 
-      <div class="popup-banner">
-    <span class="popup-banner__text">You've lost!</span>
-    <button id="reset-btn">Try again</button>
+
+  <div class="popup-over">
+    <div class="popup-over__content">
+      <span class="popup-over__text">Game over!</span>
+      <button class="popup-over__reset" id="reset-btn">Try again</button>
+    </div>
   </div>
-   -->
+
 
 
   <script type="module" src="js/script.js"></script>

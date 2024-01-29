@@ -1,14 +1,25 @@
 .header {
   position: fixed;
   width: 100%;
+  z-index: 51;
   &__container {
     padding-top: 20px;
     padding-bottom: 10px;
+
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+
+    p {
+      font-size: 28px;
+      font-weight: 700;
+    }
   }
   &__score {
-    font-size: 32px;
-    font-weight: 700;
     color: #fff;
+  }
+  &__high-score {
+    color: var(--orange-400);
   }
   &__counter {
   }

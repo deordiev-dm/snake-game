@@ -1,7 +1,8 @@
 export function addApple() {
   let freeSquares = findFreeSquares(this.squares);
 
-  this.apple = freeSquares[chooseRandomSquare(freeSquares)];
+  let x = chooseRandomSquare(freeSquares);
+  this.apple = freeSquares[x];
   this.apple.classList.add("apple");
 }
 
@@ -17,5 +18,5 @@ function findFreeSquares(squares) {
 
 function chooseRandomSquare(squares) {
   let num = squares.length;
-  return Math.floor(Math.random() * num + 1);
+  return Math.floor(Math.random() * num);
 }

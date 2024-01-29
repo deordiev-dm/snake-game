@@ -11,19 +11,25 @@ import { updateHead } from "./modules/updateHead.js";
 import { changeDirection } from "./modules/changeDirection.js";
 
 const scoreCounter = document.getElementById("score-count");
+const highScoreCounter = document.getElementById("high-score-count");
+
 const resfreshSpeed = +document.body.dataset.speed;
 const squaresInRow = +document.body.dataset.grid;
 const field = document.querySelector(".game-field");
+const popupOver = document.querySelector(".popup-over");
+const resetBtn = document.getElementById("reset-btn");
+
+let squares = fillWithSquares(field, squaresInRow);
 
 // game
-const snake = setGame();
+let snake = setGame();
 playGame();
 
 function setGame() {
-  const snake = {
-    col: 10,
-    row: 10,
-    length: 3,
+  let snake = {
+    col: 7,
+    row: 7,
+    length: 5,
     dir: "right",
     head: { square: null, index: null, oldSquare: null },
     body: [],
@@ -40,7 +46,7 @@ function setGame() {
     addApple,
     // additional properties
     grid: +document.body.dataset.grid,
-    squares: fillWithSquares(field, squaresInRow),
+    squares: squares,
   };
 
   snake.updateHead();
@@ -89,7 +95,29 @@ function playGame() {
 function stopGame(interval) {
   clearInterval(interval);
   document.removeEventListener("keydown", keyboardEventHandler);
+
   field.classList.add("game-over");
+  popupOver.classList.add("active");
+
+  if (snake.score > +highScoreCounter.innerHTML) {
+    highScoreCounter.innerHTML = snake.score;
+  }
+
+  resetBtn.addEventListener("click", resetGame);
+}
+
+function resetGame() {
+  removeSnakeClasses(snake);
+
+  field.classList.remove("game-over");
+  popupOver.classList.remove("active");
+
+  scoreCounter.innerHTML = "0";
+
+  snake = null;
+  snake = setGame();
+
+  playGame();
 }
 
 function keyboardEventHandler(e) {
@@ -97,5 +125,13 @@ function keyboardEventHandler(e) {
 
   if (arrows.includes(e.key) && snake.pressedKeys.at(-1) !== e.key) {
     snake.pressedKeys.push(e.key);
+  }
+}
+
+function removeSnakeClasses(snake) {
+  for (let square of snake.squares) {
+    square.classList.remove("snake-head");
+    square.classList.remove("snake-body");
+    square.classList.remove("apple");
   }
 }
