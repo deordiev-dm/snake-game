@@ -1,4 +1,6 @@
 .footer {
+  position: relative;
+  z-index: 52;
   color: #fff;
   font-weight: 500;
   &__container {

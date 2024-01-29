@@ -1,9 +1,13 @@
 export function addApple() {
   let freeSquares = findFreeSquares(this.squares);
 
-  let x = chooseRandomSquare(freeSquares);
-  this.apple = freeSquares[x];
-  this.apple.classList.add("apple");
+  if (freeSquares.length === 0) {
+    this.stopGame();
+    this.celebrate();
+  } else {
+    this.apple = freeSquares[chooseRandomSquare(freeSquares)];
+    this.apple.classList.add("apple");
+  }
 }
 
 function findFreeSquares(squares) {

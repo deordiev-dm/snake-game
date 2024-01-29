@@ -1,3 +1,4 @@
+import { showConfetti } from "./modules/confetti.js";
 import { fillWithSquares } from "./modules/fillWithSquares.js";
 
 import { HandleHeadClass } from "./modules/handleHeadClass.js";
@@ -10,32 +11,37 @@ import { updateHead } from "./modules/updateHead.js";
 
 import { changeDirection } from "./modules/changeDirection.js";
 
-const scoreCounter = document.getElementById("score-count");
-const highScoreCounter = document.getElementById("high-score-count");
-
 const resfreshSpeed = +document.body.dataset.speed;
 const squaresInRow = +document.body.dataset.grid;
 const field = document.querySelector(".game-field");
-const popupOver = document.querySelector(".popup-over");
-const resetBtn = document.getElementById("reset-btn");
+const popupOver = document.querySelector(".popup--over");
+const popupWin = document.querySelector(".popup--win");
+const resetBtns = Array.from(document.querySelectorAll(".popup__reset"));
+
+const scoreCounter = document.getElementById("score-count");
+const highScoreCounter = document.getElementById("high-score-count");
+
+highScoreCounter.innerHTML = localStorage.getItem("highestScore") || 0;
 
 let squares = fillWithSquares(field, squaresInRow);
 
 // game
 let snake = setGame();
-playGame();
+snake.playGame();
 
 function setGame() {
   let snake = {
-    col: 7,
-    row: 7,
-    length: 5,
+    col: 5,
+    row: 5,
+    length: 3,
     dir: "right",
     head: { square: null, index: null, oldSquare: null },
     body: [],
     apple: null,
     score: 0,
     pressedKeys: [],
+    win: false,
+    failed: false,
     // methods
     changeDirection,
     updateCoordinates,
@@ -47,12 +53,17 @@ function setGame() {
     // additional properties
     grid: +document.body.dataset.grid,
     squares: squares,
+    // handle game states
+    playGame,
+    stopGame,
+    resetGame,
+    celebrate,
+    gameOver,
   };
 
   snake.updateHead();
   snake.HandleHeadClass();
   snake.handleBodyClass();
-
   snake.addApple();
 
   return snake;
@@ -61,64 +72,89 @@ function setGame() {
 function playGame() {
   document.addEventListener("keydown", keyboardEventHandler);
 
-  let gameInterval = setInterval(() => {
-    snake.changeDirection();
+  this.interval = setInterval(() => {
+    this.changeDirection();
 
-    snake.updateCoordinates();
-    snake.updateBody();
-    snake.updateHead();
+    this.updateCoordinates();
+    this.updateBody();
+    this.updateHead();
 
-    for (let square of snake.body) {
-      if (square === snake.head.square) {
-        stopGame(gameInterval);
-        return;
+    for (let square of this.body) {
+      if (square === this.head.square) {
+        this.stopGame();
+        this.gameOver();
       }
     }
 
-    snake.handleBodyClass();
-    snake.HandleHeadClass();
+    this.handleBodyClass();
+    this.HandleHeadClass();
 
-    if (snake.head.square === snake.apple) {
-      snake.length++;
+    if (this.head.square === this.apple) {
+      this.length++;
 
-      snake.score++;
-      scoreCounter.innerHTML = snake.score;
+      this.score++;
+      scoreCounter.innerHTML = this.score;
 
-      snake.body.push(snake.squares[0]);
+      this.body.push(this.squares[0]);
 
-      snake.apple.classList.remove("apple");
-      snake.addApple();
+      this.apple.classList.remove("apple");
+      this.addApple();
+    }
+
+    if (this.win) {
+      this.celebrate();
+      return;
     }
   }, resfreshSpeed);
 }
 
-function stopGame(interval) {
-  clearInterval(interval);
+function stopGame() {
+  clearInterval(this.interval);
   document.removeEventListener("keydown", keyboardEventHandler);
-
-  field.classList.add("game-over");
-  popupOver.classList.add("active");
-
-  if (snake.score > +highScoreCounter.innerHTML) {
-    highScoreCounter.innerHTML = snake.score;
-  }
-
-  resetBtn.addEventListener("click", resetGame);
 }
 
 function resetGame() {
   removeSnakeClasses(snake);
 
+  clearInterval(this.confettiInterval);
+
   field.classList.remove("game-over");
   popupOver.classList.remove("active");
+  popupWin.classList.remove("active");
 
   scoreCounter.innerHTML = "0";
 
   snake = null;
   snake = setGame();
 
-  playGame();
+  snake.playGame();
 }
+
+function celebrate() {
+  popupWin.classList.add("active");
+
+  this.confettiInterval = setInterval(() => {
+    showConfetti();
+  }, 300);
+}
+
+function gameOver() {
+  field.classList.add("game-over");
+  popupOver.classList.add("active");
+
+  if (this.score > +highScoreCounter.innerHTML) {
+    localStorage.setItem("highestScore", this.score);
+    highScoreCounter.innerHTML = this.score;
+  }
+}
+
+document.addEventListener("click", (e) => {
+  if (resetBtns.includes(e.target)) {
+    snake.resetGame();
+  }
+});
+
+// * ==========================
 
 function keyboardEventHandler(e) {
   const arrows = ["ArrowUp", "ArrowRight", "ArrowDown", "ArrowLeft"];

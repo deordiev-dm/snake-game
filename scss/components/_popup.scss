@@ -1,21 +1,24 @@
-.popup-over {
+.popup {
   visibility: hidden;
   opacity: 0;
 
-  transition: all 500ms ease 150ms;
-  &.active {
-    visibility: visible;
-    opacity: 1;
-    z-index: 50;
-  }
+  transition: all 800ms ease 300ms;
+
+  background-color: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 
   position: fixed;
   height: 100%;
   width: 100%;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(2px);
+
+  &.active {
+    visibility: visible;
+    opacity: 1;
+    z-index: 51;
+  }
 
   &__content {
     height: 100%;
@@ -27,9 +30,11 @@
     align-items: center;
     gap: 30px;
 
+    user-select: none;
+
     opacity: 0;
     transform: scale(0);
-    transition: all 400ms ease 300ms;
+    transition: all 800ms ease 500ms;
 
     .active & {
       transform: scale(1);
@@ -43,11 +48,11 @@
     color: #e1ffe4;
   }
   &__reset {
-    padding: 15px;
+    padding: 20px;
     background-color: #44bb20;
 
     color: #e1ffe4;
-    font-size: 36px;
+    font-size: 48px;
     font-weight: 600;
     border-radius: 8px;
 
