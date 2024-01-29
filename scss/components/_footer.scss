@@ -8,6 +8,13 @@
     padding-bottom: 15px;
     border-radius: 10px 10px 0 0;
 
+    @media (max-width: 768px) {
+      & {
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+    }
+
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -19,10 +26,23 @@
   &__icons {
     display: flex;
     gap: 15px;
+
+    @media (max-width: 768px) {
+      & {
+        gap: 10px;
+      }
+    }
   }
   &__link {
     padding: 5px;
     font-size: 28px;
+
+    @media (max-width: 768px) {
+      & {
+        font-size: 22px;
+      }
+    }
+
     transition: color 300ms ease;
     @media (any-hover: hover) {
       &:hover {
@@ -31,5 +51,13 @@
     }
   }
   &__icon {
+  }
+
+  &__text {
+    @media (max-width: 445px) {
+      & {
+        display: none;
+      }
+    }
   }
 }

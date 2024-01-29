@@ -1,9 +1,27 @@
 .game-field {
+  aspect-ratio: 1/1;
   width: 550px;
-  height: 550px;
   box-shadow: 10px 10px 50px #00000055;
   border-radius: 10px;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    & {
+      width: 450px;
+    }
+  }
+
+  @media (max-width: 500px) {
+    & {
+      width: 320px;
+    }
+  }
+
+  @media (max-width: 350px) {
+    & {
+      width: 290px;
+    }
+  }
 
   background-color: var(--yellow-400);
   outline: 3px solid var(--green-400);
